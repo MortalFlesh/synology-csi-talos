@@ -15,7 +15,7 @@ clientInfoSecret:
   # Whether to create the secret or not
   create: false
   # Defaults to {{ include "synology-csi.fullname" $ }}-client-info if empty or not present:
-  name: "client-info-secret"
+  name: "mortaleknas-client-info-secret"
 # Specifies affinity, nodeSelector and tolerations for the controller StatefulSet
 controller:
   affinity: { }
@@ -36,9 +36,11 @@ images:
   plugin:
     pullPolicy: IfNotPresent
     image:
-      repository: ghcr.io/zebernst/synology-csi
+      repository: ghcr.io/mortalflesh/synology-csi
       # Defaults to {{ $.Chart.AppVersion }} if empty or not present:
-      tag: ""
+      tag: "v1.2.0-amd64"
+      imagePullSecrets:
+        - name: ghcr-secret
   provisioner:
     pullPolicy: IfNotPresent
     image:
